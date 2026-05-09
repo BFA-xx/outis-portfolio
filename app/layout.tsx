@@ -5,19 +5,23 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Outis | Web3 Researcher & Builder",
-  description: "Crypto researcher and builder focused on Privacy, DePIN, AI infrastructure, and vibe coding. Co-founder at KOSLabs.",
-  keywords: ["Web3", "Crypto", "Privacy", "DePIN", "AI Infrastructure", "Blockchain", "KOSLabs"],
+  title: "Outis | Crypto Content Creator",
+  description: "Crypto researcher and content creator focused on Privacy, DePIN, and AI infrastructure. Co-founder at KOSLabs.",
+  keywords: ["Web3", "Crypto", "Privacy", "DePIN", "AI Infrastructure", "KOSLabs"],
   authors: [{ name: "Outis" }],
+  icons: {
+    icon: "/favicon.png",
+    apple: "/favicon.png",
+  },
   openGraph: {
-    title: "Outis | Web3 Researcher & Builder",
-    description: "Bridging crypto research with real-world systems thinking",
+    title: "Outis | Crypto Content Creator",
+    description: "Crypto research, real talk, and content that actually lands.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Outis | Web3 Researcher & Builder",
-    description: "Bridging crypto research with real-world systems thinking",
+    title: "Outis | Crypto Content Creator",
+    description: "Crypto research, real talk, and content that actually lands.",
     creator: "@Tosincrypt",
   },
 };
