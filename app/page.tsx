@@ -71,62 +71,69 @@ export default function Home() {
       </nav>
 
       {/* Hero */}
-      <section ref={heroRef} className="relative min-h-screen flex flex-col justify-end pb-16 overflow-hidden">
-        {/* Banner */}
-        <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
-          <div style={{ width: '55%', height: '90%', backgroundImage: 'url(/banner.jpg)', backgroundSize: 'contain', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', opacity: 0.85 }} />
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,1) 100%)' }} />
-        </div>
-        <div className="absolute inset-0 opacity-5" style={{ backgroundImage: 'linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px)', backgroundSize: '80px 80px' }} />
-        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+      <section ref={heroRef} className="relative flex flex-col">
 
-        <div className="relative max-w-6xl mx-auto w-full px-8 md:px-16">
-          {/* Profile */}
-          <div className="mb-8 mt-24 flex items-center gap-4">
-            <div className="relative">
-              <div className="w-12 h-12 rounded-full border border-white/30 overflow-hidden bg-gray-900">
-                <img src="/profile.jpg" alt="Outis" className="w-full h-full object-cover" />
-              </div>
-              {/* Checkmark badge */}
-              <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-gray-500 border-2 border-black flex items-center justify-center">
-                <svg width="9" height="7" viewBox="0 0 9 7" fill="none">
-                  <path d="M1 3.5L3.5 6L8 1" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </div>
-            </div>
-            <div>
-              <p className="text-white font-bold tracking-widest text-xs uppercase">Outis</p>
-              <p className="text-gray-500 text-xs tracking-[0.2em] uppercase">Crypto Content Creator</p>
-            </div>
-          </div>
-
-          <h1 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 3.5rem)', fontWeight: '700', lineHeight: '1.15', letterSpacing: '-0.02em' }}
-            className="text-white mb-6 max-w-2xl">
-            Crypto research, real talk, and content that actually lands.
-          </h1>
-
-          <p className="text-gray-400 text-base max-w-lg leading-relaxed mb-3">
-            I write about Privacy, DePIN, and AI infrastructure for people who care about the tech, not just the price.
-          </p>
-          <p className="text-gray-500 text-sm max-w-lg leading-relaxed mb-10">
-            Food engineering student. Co-founder at KOSLabs. Living in both worlds and writing from that edge.
-          </p>
-
-          <div className="flex flex-wrap gap-4">
-            <a href="#hire"
-              className="inline-flex items-center gap-3 bg-white text-black text-xs tracking-[0.2em] uppercase px-8 py-4 hover:bg-gray-200 transition-all duration-300">
-              Work With Me <ArrowUpRight size={14} />
-            </a>
-            <a href="https://x.com/Tosincrypt" target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 border border-white/30 text-white text-xs tracking-[0.2em] uppercase px-8 py-4 hover:border-white transition-all duration-300">
-              Follow on X <Twitter size={14} />
-            </a>
-          </div>
+        {/* Banner - responsive height */}
+        <div className="w-full relative overflow-hidden mt-20 md:mt-16" style={{ height: 'clamp(300px, 50vw, 600px)' }}>
+          <div style={{
+            width: '100%',
+            height: '100%',
+            backgroundImage: 'url(/banner.jpg)',
+            backgroundSize: 'contain',
+            backgroundPosition: 'top center',
+            backgroundRepeat: 'no-repeat',
+            opacity: 0.9
+          }} />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.0) 50%, rgba(0,0,0,1) 100%)' }} />
+          <div className="absolute inset-0 opacity-5" style={{ backgroundImage: 'linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px)', backgroundSize: '80px 80px' }} />
         </div>
 
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
-          <span className="text-xs tracking-[0.3em] uppercase text-gray-600">Scroll</span>
-          <ChevronDown size={16} className="text-gray-600" />
+        {/* Content - fully below banner */}
+        <div className="relative bg-black w-full px-8 md:px-16 py-12">
+          <div className="max-w-6xl mx-auto">
+
+            {/* Profile */}
+            <div className="mb-6 flex items-center gap-4">
+              <div className="relative">
+                <div className="w-12 h-12 rounded-full border border-white/30 overflow-hidden bg-gray-900">
+                  <img src="/profile.jpg" alt="Outis" className="w-full h-full object-cover" />
+                </div>
+                <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-gray-500 border-2 border-black flex items-center justify-center">
+                  <svg width="7" height="6" viewBox="0 0 9 7" fill="none">
+                    <path d="M1 3.5L3.5 6L8 1" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <p className="text-white font-bold tracking-widest text-xs uppercase">Outis</p>
+                <p className="text-gray-500 text-xs tracking-[0.15em] uppercase">Crypto Content Creator</p>
+              </div>
+            </div>
+
+            {/* Text */}
+            <h1 style={{ fontSize: 'clamp(1.8rem, 4vw, 3.5rem)', fontWeight: '700', lineHeight: '1.15', letterSpacing: '-0.02em' }}
+              className="text-white mb-4 max-w-3xl">
+              Crypto research, real talk, and content that actually lands.
+            </h1>
+
+            <p className="text-gray-400 text-sm md:text-base max-w-2xl leading-relaxed mb-2">
+              I write about Privacy, DePIN, and AI infrastructure for people who care about the tech, not just the price.
+            </p>
+            <p className="text-gray-500 text-xs md:text-sm max-w-2xl leading-relaxed mb-8">
+              Food engineering student. Co-founder at KOSLabs. Living in both worlds and writing from that edge.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-3">
+              <a href="#hire"
+                className="inline-flex items-center justify-center gap-2 bg-white text-black text-xs tracking-[0.2em] uppercase px-6 py-3 hover:bg-gray-200 transition-all duration-300">
+                Work With Me <ArrowUpRight size={13} />
+              </a>
+              <a href="https://x.com/Tosincrypt" target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 border border-white/30 text-white text-xs tracking-[0.2em] uppercase px-6 py-3 hover:border-white transition-all duration-300">
+                Follow on X <Twitter size={13} />
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -134,7 +141,7 @@ export default function Home() {
       <section className="border-y border-white/10 bg-white/[0.02]">
         <div className="max-w-6xl mx-auto px-8 md:px-16 py-10 grid grid-cols-2 md:grid-cols-4 gap-8">
           {[
-            { value: "4+", label: "Years in Crypto" },
+            { value: "5+", label: "Years in Crypto" },
             { value: "4", label: "Content Formats" },
             { value: "Web3", label: "Native Voice" },
             { value: "1", label: "Lab Co-founded" },
