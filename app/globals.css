@@ -1,26 +1,274 @@
 @import "tailwindcss";
 
+/* ─────────────────────────────────────────────────────────────────────────
+   OUTIS // SYSTEM DESIGN TOKENS
+   Dark space base, liquid-glass surfaces, cyan + purple glow accents only.
+   ───────────────────────────────────────────────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Charcoal × Japanese Indigo base */
+  --space: #0b1316;
+  --space-2: #0e181c;
+  /* Star Dust ink + Mid Grey secondaries */
+  --ink: #f2edea;
+  --ink-dim: #9aa4a8;
+  --ink-faint: #6c757a;
+
+  /* Accent triplets. Names kept as --cyan/--purple so every Tailwind utility
+     (text-cyan, bg-cyan, …) and existing rgba() literal keeps working, but they
+     now hold the new palette: Steel Teal (#6C9BAD) + Foggy sage (#C4C2AA). */
+  --cyan: 108, 155, 173;
+  --purple: 196, 194, 170;
+  --indigo: 40, 92, 112; /* Japanese Indigo #285C70 */
+  --glass: 236, 239, 240;
+
+  --edge: rgba(236, 239, 240, 0.08);
+  --edge-strong: rgba(236, 239, 240, 0.18);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-space: var(--space);
+  --color-ink: var(--ink);
+  --color-ink-dim: var(--ink-dim);
+  --color-ink-faint: var(--ink-faint);
+  --color-cyan: rgb(var(--cyan));
+  --color-purple: rgb(var(--purple));
+  --font-sans: var(--font-display);
+  --font-mono: var(--font-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+/* Lenis smooth scroll baseline */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+html {
+  background: var(--space);
+  color-scheme: dark;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--space);
+  color: var(--ink);
+  font-family: var(--font-display), system-ui, sans-serif;
+  min-height: 100svh;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(var(--cyan), 0.25);
+  color: #fff;
+}
+
+/* ── Liquid glass surfaces ──────────────────────────────────────────────── */
+.glass {
+  background: linear-gradient(
+    160deg,
+    rgba(var(--glass), 0.07),
+    rgba(var(--glass), 0.025)
+  );
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid var(--edge);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 24px 60px -28px rgba(0, 0, 0, 0.8);
+}
+
+.glass-strong {
+  background: linear-gradient(
+    160deg,
+    rgba(10, 16, 40, 0.85),
+    rgba(7, 11, 31, 0.72)
+  );
+  backdrop-filter: blur(28px) saturate(150%);
+  -webkit-backdrop-filter: blur(28px) saturate(150%);
+  border: 1px solid var(--edge-strong);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 40px 120px -40px rgba(0, 0, 0, 0.9);
+}
+
+/* hairline gradient ring for panels */
+.ring-glow {
+  position: relative;
+}
+.ring-glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    140deg,
+    rgba(var(--cyan), 0.5),
+    rgba(var(--purple), 0.18) 45%,
+    transparent 70%
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+.ring-glow:hover::before,
+.ring-glow[data-active="true"]::before {
+  opacity: 1;
+}
+
+/* ── Glow helpers ───────────────────────────────────────────────────────── */
+.glow-cyan {
+  box-shadow: 0 0 0 1px rgba(var(--cyan), 0.25), 0 12px 50px -12px rgba(var(--cyan), 0.5);
+}
+.glow-purple {
+  box-shadow: 0 0 0 1px rgba(var(--purple), 0.25), 0 12px 50px -12px rgba(var(--purple), 0.5);
+}
+.text-glow-cyan {
+  text-shadow: 0 0 24px rgba(var(--cyan), 0.45);
+}
+.text-glow-purple {
+  text-shadow: 0 0 24px rgba(var(--purple), 0.45);
+}
+
+.accent-cyan {
+  --accent: var(--cyan);
+}
+.accent-purple {
+  --accent: var(--purple);
+}
+
+/* ── Aurora nebula blobs (background) ───────────────────────────────────── */
+.aurora {
+  filter: blur(80px);
+  will-change: transform;
+  mix-blend-mode: screen;
+}
+.aurora--cyan {
+  width: 46vw;
+  height: 46vw;
+  top: -8vw;
+  left: 8vw;
+  background: radial-gradient(circle, rgba(var(--cyan), 0.9), transparent 62%);
+  animation: drift-a 26s ease-in-out infinite;
+}
+.aurora--purple {
+  width: 50vw;
+  height: 50vw;
+  top: 18vh;
+  right: -6vw;
+  background: radial-gradient(circle, rgba(var(--purple), 0.85), transparent 62%);
+  animation: drift-b 32s ease-in-out infinite;
+}
+.aurora--deep {
+  width: 60vw;
+  height: 60vw;
+  bottom: -22vw;
+  left: 22vw;
+  background: radial-gradient(circle, rgba(var(--indigo), 0.85), transparent 64%);
+  animation: drift-c 38s ease-in-out infinite;
+}
+
+@keyframes drift-a {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(6vw, 4vh, 0) scale(1.12); }
+}
+@keyframes drift-b {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1.05); }
+  50% { transform: translate3d(-5vw, 6vh, 0) scale(0.92); }
+}
+@keyframes drift-c {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(4vw, -5vh, 0) scale(1.1); }
+}
+
+/* ── Grain ──────────────────────────────────────────────────────────────── */
+.bg-grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+/* ── Scanline shimmer for boot/terminal text ────────────────────────────── */
+.scanline {
+  position: relative;
+  overflow: hidden;
+}
+.scanline::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(var(--cyan), 0.06) 50%,
+    transparent
+  );
+  background-size: 100% 6px;
+  animation: scan 8s linear infinite;
+  pointer-events: none;
+}
+@keyframes scan {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(100%); }
+}
+
+.cursor-blink {
+  animation: blink 1.1s steps(1) infinite;
+}
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* ── Custom scrollbar ───────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(var(--cyan), 0.25);
+  border-radius: 99px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(var(--cyan), 0.45);
+  background-clip: content-box;
+}
+
+/* mono label tracking used throughout the system UI */
+.mono-label {
+  font-family: var(--font-mono), monospace;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+/* ── SYSTEM mode amplification ──────────────────────────────────────────── */
+[data-mode="system"] .aurora {
+  filter: blur(70px);
+}
+
+/* Reduced motion: kill the heavy ambient animation. */
+@media (prefers-reduced-motion: reduce) {
+  .aurora,
+  .scanline::after,
+  .cursor-blink {
+    animation: none !important;
+  }
 }
