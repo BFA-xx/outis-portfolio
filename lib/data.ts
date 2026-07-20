@@ -24,7 +24,7 @@ export const identity: Identity = {
   manifesto: [
     "I build the software crypto projects launch with.",
     "Launch sites, token pages, dashboards, admin panels, claim and staking portals, Telegram and Discord bots, wallet integrations. Designed, built and shipped by one engineer.",
-    "Running live on Ethereum mainnet with real money moving through it. Currently taking on new projects.",
+    "Running live on mainnet across multiple chains, with real money moving through it. Currently taking on new projects.",
   ],
 };
 
@@ -48,7 +48,7 @@ export interface CoreStat {
 }
 
 export const coreStats: CoreStat[] = [
-  { value: "LIVE", label: "Shipped on Ethereum mainnet" },
+  { value: "LIVE", label: "Multichain, live on mainnet" },
   { value: "24/7", label: "Always-on infrastructure" },
   { value: "200+", label: "Wallets under automation" },
   { value: "100%", label: "Transactions simulated first" },
@@ -189,16 +189,16 @@ export const modules: ProjectModule[] = [
     codename: "MOD-01 · MINTOOOR",
     name: "Mintooor",
     category: "NFT Launch & Minting Platform",
-    status: "LIVE · MAINNET",
+    status: "LIVE · MULTICHAIN",
     accent: "cyan",
     tagline:
-      "Production NFT minting platform with automated execution, multi-wallet management and full Telegram control.",
+      "Production multichain NFT minting platform with automated execution, multi-wallet management and full Telegram control.",
     summary:
       "Built for teams and collectors who need to mint reliably when it actually counts. Paste a contract or a link and the platform reads the drop, works out which wallets are eligible, times the open to the second, and executes, while refusing to spend on any transaction it can't first prove safe. Runs on its own always-on infrastructure.",
     liveUrl: "https://mint.koslabs.app/",
     meta: [
       { label: "Interface", value: "Telegram bot + web dashboard" },
-      { label: "Network", value: "Ethereum mainnet" },
+      { label: "Networks", value: "Multichain, live on mainnet" },
       { label: "Hosting", value: "Dedicated server · 24/7" },
     ],
     problem:
@@ -206,6 +206,7 @@ export const modules: ProjectModule[] = [
     architecture:
       "A pnpm monorepo: a NestJS API for chain logic, a grammY Telegram bot for the interface, and a Next.js read-only dashboard. viem drives the chain with a resilient multi-RPC fallback; seaport-js powers listings and sweeps. State lives in Postgres + Redis; the whole stack runs 24/7 on AWS EC2 under pm2 with persisted snipe / copy / reminder rules that survive every restart.",
     capabilities: [
+      "Runs across multiple chains rather than being locked to a single network.",
       "Reads any drop automatically, including standard mints, launchpads, free-then-paid and bonding-curve pricing.",
       "Times the sale opening precisely so a mint isn't lost to a few seconds of delay.",
       "Mirrors chosen wallets onchain and buys the same assets automatically, matching quantity and speed.",
@@ -215,7 +216,7 @@ export const modules: ProjectModule[] = [
     ],
     stack: ["TypeScript", "NestJS", "Next.js", "grammY", "viem", "seaport-js", "PostgreSQL", "Redis", "pm2", "AWS EC2"],
     impact: [
-      { label: "Status", value: "Live on mainnet with real funds" },
+      { label: "Status", value: "Live on mainnet, multichain" },
       { label: "Reliability", value: "24/7, survives restarts" },
       { label: "Scale", value: "Up to 200 wallets managed" },
     ],
@@ -292,7 +293,7 @@ export const timeline: TimelineEntry[] = [
     stamp: "2026·06·14",
     title: "Shipped first production minting platform",
     detail:
-      "Took the NFT minting platform from prototype to always-on production infrastructure, running continuously and handling real funds on Ethereum mainnet.",
+      "Took the NFT minting platform from prototype to always-on production infrastructure, running continuously and handling real funds on mainnet.",
     tag: "LAUNCH",
     accent: "cyan",
   },
@@ -365,7 +366,7 @@ export const logs: CaptainLog[] = [
     title: "Simulate before you spend",
     excerpt: "In production, optimism is a liability. Prove it, then send it.",
     body: [
-      "Every mint Mintooor makes is simulated before a single wei leaves a wallet, including a detector for drainer and approval side-effects. If the data is wrong, the simulation fails and nothing is broadcast.",
+      "Every mint Mintooor makes is simulated before anything leaves a wallet, including a detector for drainer and approval side-effects. If the data is wrong, the simulation fails and nothing is broadcast.",
       "This came straight out of food production thinking: you don't taste-test the whole batch, you validate the process so the bad batch never ships. Same instinct, different chain.",
       "It's the one invariant I will never trade for speed. Fast is good. Fast and wrong is how you lose real money.",
     ],
