@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Send, Mail, MessageCircle, ArrowUpRight } from "lucide-react";
 import { socials, identity } from "@/lib/data";
+import { AvailabilityPanel } from "../ui/AvailabilityPanel";
 import { fadeUp, stagger } from "@/lib/motion";
 
 // X glyph (lucide dropped the Twitter bird; render the X mark inline).
@@ -40,7 +41,7 @@ export function Contact() {
 
         <motion.div variants={fadeUp} className="mb-3 flex items-center gap-3">
           <span className="h-px w-8 bg-gradient-to-r from-cyan to-transparent" />
-          <span className="mono-label text-[10px] text-cyan">06 // OPEN A CHANNEL</span>
+          <span className="mono-label text-[10px] text-cyan">09 // OPEN A CHANNEL</span>
         </motion.div>
 
         <motion.h2
@@ -49,11 +50,16 @@ export function Contact() {
         >
           Launching a token, an NFT drop or a Web3 product?
         </motion.h2>
-        <motion.p variants={fadeUp} className="mt-4 max-w-lg text-sm leading-relaxed text-ink-dim sm:text-base">
-          I build the sites, dashboards, portals and bots crypto teams launch with, from a one-page
-          token site to a full admin platform with onchain automation behind it. Tell me what
-          you&apos;re shipping and when, and you&apos;ll get a straight answer on scope and timing.
+        <motion.p variants={fadeUp} className="mt-4 max-w-xl text-sm leading-relaxed text-ink-dim sm:text-base">
+          Launch websites, dashboards, Telegram and Discord bots, and custom Web3 software.
+          Production-ready code, shipped in days rather than months. Send me what you&apos;re
+          building and when it needs to be live, and you&apos;ll get a straight answer on scope,
+          timing and cost. No discovery calls to book first.
         </motion.p>
+
+        <motion.div variants={fadeUp} className="mt-8">
+          <AvailabilityPanel />
+        </motion.div>
 
         <motion.div variants={fadeUp} className="mt-9 grid gap-3 sm:grid-cols-2">
           {socials.map((s) => (

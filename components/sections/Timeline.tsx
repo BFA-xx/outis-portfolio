@@ -20,7 +20,7 @@ export function Timeline() {
   return (
     <section id="timeline" className="relative mx-auto max-w-[1240px] px-5 py-24 sm:px-8 lg:px-12 sm:py-32">
       <SectionHeading
-        index="04 // SYSTEM EVOLUTION LOG"
+        index="05 // SYSTEM EVOLUTION LOG"
         title="Track record."
         blurb="How the work developed, from engineering foundations to live production platforms, and what I'm taking on now."
       />

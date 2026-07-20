@@ -125,7 +125,7 @@ export function Hero() {
             className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-cyan px-7 py-3.5 text-sm font-semibold text-[#0b1316] transition-transform hover:scale-[1.03] active:scale-95"
             style={{ boxShadow: "0 12px 50px -12px rgba(108,155,173,0.7)" }}
           >
-            <span className="relative z-10">Start a project</span>
+            <span className="relative z-10">Launch With Me</span>
             <ArrowRight size={16} className="relative z-10 transition-transform group-hover:translate-x-1" />
             <span className="absolute inset-0 -translate-x-full bg-white/40 transition-transform duration-500 group-hover:translate-x-full" />
           </button>

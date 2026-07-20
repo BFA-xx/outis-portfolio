@@ -22,9 +22,9 @@ export const identity: Identity = {
   status: "ONLINE",
   avatar: "/profile.jpg",
   manifesto: [
-    "I build the software crypto projects launch with.",
-    "Launch sites, token pages, dashboards, admin panels, claim and staking portals, Telegram and Discord bots, wallet integrations. Designed, built and shipped by one engineer.",
-    "Running live on mainnet across multiple chains, with real money moving through it. Currently taking on new projects.",
+    "I build the production software crypto projects launch on.",
+    "Launch sites, token pages, dashboards, admin panels, claim and staking portals, Telegram and Discord bots, wallet integrations. Scoped, built and shipped by one engineer, usually in days rather than months.",
+    "Live on mainnet across multiple chains with real money moving through it. Currently accepting 2 new client projects.",
   ],
 };
 
@@ -52,6 +52,55 @@ export const coreStats: CoreStat[] = [
   { value: "24/7", label: "Always-on infrastructure" },
   { value: "200+", label: "Wallets under automation" },
   { value: "100%", label: "Transactions simulated first" },
+];
+
+// ── DEPLOYMENT STACK ─────────────────────────────────────────────────────────
+
+export interface StackGroup {
+  id: string;
+  label: string;
+  /** Icon key resolved to a lucide component in the Stack section. */
+  icon: string;
+  accent: Accent;
+  items: string[];
+}
+
+export const stackGroups: StackGroup[] = [
+  {
+    id: "chains",
+    label: "Chains",
+    icon: "chain",
+    accent: "cyan",
+    items: ["Ethereum", "Base", "Polygon", "Arbitrum"],
+  },
+  {
+    id: "frontend",
+    label: "Frontend",
+    icon: "frontend",
+    accent: "purple",
+    items: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion"],
+  },
+  {
+    id: "backend",
+    label: "Backend",
+    icon: "backend",
+    accent: "cyan",
+    items: ["NestJS", "Node.js", "PostgreSQL", "Prisma", "Redis"],
+  },
+  {
+    id: "onchain",
+    label: "Onchain",
+    icon: "onchain",
+    accent: "purple",
+    items: ["viem", "ethers.js", "wagmi", "WalletConnect", "Seaport"],
+  },
+  {
+    id: "infra",
+    label: "Infrastructure",
+    icon: "infra",
+    accent: "cyan",
+    items: ["Vercel", "AWS EC2", "Docker", "PM2", "GitHub Actions", "Railway"],
+  },
 ];
 
 // ── SERVICES (what I build) ──────────────────────────────────────────────────
@@ -396,6 +445,145 @@ export const logs: CaptainLog[] = [
     ],
   },
 ];
+
+// ── WHO I BUILD FOR ──────────────────────────────────────────────────────────
+
+export interface ClientType {
+  id: string;
+  title: string;
+  blurb: string;
+  /** Icon key resolved to a lucide component in the Clients section. */
+  icon: string;
+  accent: Accent;
+}
+
+export const clientTypes: ClientType[] = [
+  {
+    id: "memecoin",
+    title: "Memecoin Projects",
+    blurb: "A token page, buy links and a bot running the community while the chart moves.",
+    icon: "flame",
+    accent: "cyan",
+  },
+  {
+    id: "nft",
+    title: "NFT Collections",
+    blurb: "Mint pages, allowlist and claim flows, plus the raffle tooling behind the whitelist.",
+    icon: "gem",
+    accent: "purple",
+  },
+  {
+    id: "startups",
+    title: "Crypto Startups",
+    blurb: "Real product surfaces: dashboards, admin panels and the backend that keeps them fed.",
+    icon: "startup",
+    accent: "cyan",
+  },
+  {
+    id: "trading",
+    title: "Trading Platforms",
+    blurb: "Live data, wallet connection and execution interfaces that stay responsive under load.",
+    icon: "trading",
+    accent: "purple",
+  },
+  {
+    id: "launchpads",
+    title: "Launchpads",
+    blurb: "Multi-project sale phases and admin controls your team can run without a developer on call.",
+    icon: "launchpad",
+    accent: "cyan",
+  },
+  {
+    id: "creators",
+    title: "Creator Communities",
+    blurb: "Token-gated access, claim portals and automation that rewards the people who show up.",
+    icon: "creators",
+    accent: "purple",
+  },
+  {
+    id: "discord",
+    title: "Discord Communities",
+    blurb: "Verification, roles, raffles and giveaways handled by a bot instead of a moderator.",
+    icon: "discord",
+    accent: "cyan",
+  },
+  {
+    id: "telegram",
+    title: "Telegram Communities",
+    blurb: "Command-driven bots for mints, alerts, sales and whatever the group asks for on repeat.",
+    icon: "telegram",
+    accent: "purple",
+  },
+];
+
+// ── RECENT DEPLOYMENTS ───────────────────────────────────────────────────────
+// Add a new object here to publish another build. `image` is optional: drop a
+// file in /public and reference it (e.g. "/builds/my-project.jpg"), or leave it
+// out and the card renders a clean codename plate instead.
+
+export interface Build {
+  id: string;
+  title: string;
+  description: string;
+  stack: string[];
+  status: string;
+  accent: Accent;
+  liveUrl?: string;
+  repoUrl?: string;
+  image?: string;
+}
+
+export const recentBuilds: Build[] = [
+  {
+    id: "build-mintooor",
+    title: "Mintooor",
+    description:
+      "Multichain NFT minting platform with automated execution, multi-wallet management and a Telegram control surface.",
+    stack: ["Next.js", "NestJS", "viem", "PostgreSQL"],
+    status: "LIVE",
+    accent: "cyan",
+    liveUrl: "https://mint.koslabs.app/",
+  },
+  {
+    id: "build-kos-raffles",
+    title: "KOS Raffles",
+    description:
+      "Whitelist and giveaway platform for Discord communities, with a verifiable draw and a team control dashboard.",
+    stack: ["Next.js", "discord.js", "Prisma", "PostgreSQL"],
+    status: "LIVE",
+    accent: "purple",
+    liveUrl: "https://raffle.koslabs.app/",
+  },
+  {
+    id: "build-outis",
+    title: "OUTIS System Core",
+    description:
+      "This site. An interactive operating system built as a single continuous surface, with a reactive canvas background.",
+    stack: ["Next.js", "TypeScript", "Framer Motion", "Tailwind"],
+    status: "LIVE",
+    accent: "cyan",
+    liveUrl: "https://realoutis.com",
+  },
+];
+
+// ── AVAILABILITY ─────────────────────────────────────────────────────────────
+
+export interface AvailabilitySlot {
+  label: string;
+  value: string;
+}
+
+export const availability = {
+  status: "AVAILABLE",
+  headline: "Currently accepting 2 new client projects.",
+  pricing: "Projects typically start from $500 USD.",
+  slots: [
+    { label: "Average reply", value: "Under 12 hours" },
+    { label: "Typical delivery", value: "3 to 14 days" },
+    { label: "Location", value: "Remote" },
+    { label: "Timezone", value: "GMT+1" },
+  ] as AvailabilitySlot[],
+};
 
 export const navItems = [
   { id: "core", label: "Home" },

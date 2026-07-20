@@ -15,7 +15,7 @@ export function Projects() {
   return (
     <section id="modules" className="relative mx-auto max-w-[1500px] px-5 py-24 sm:px-8 lg:px-12 sm:py-32">
       <SectionHeading
-        index="03 // DEPLOYED SYSTEMS"
+        index="04 // DEPLOYED SYSTEMS"
         title="Systems, not screenshots."
         blurb="Real platforms in production, with real money and real communities running through them. Activate a module for the full breakdown."
       />

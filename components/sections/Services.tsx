@@ -46,7 +46,7 @@ export function Services() {
       className="relative mx-auto max-w-[1500px] px-5 py-24 sm:px-8 lg:px-12 sm:py-32"
     >
       <SectionHeading
-        index="02 // AVAILABLE MODULES"
+        index="03 // AVAILABLE MODULES"
         title="What I build."
         blurb="Pick a module. Each one ships production-ready, wired to your contracts, and handed over with the keys."
       />
@@ -84,7 +84,7 @@ export function Services() {
           className="group inline-flex shrink-0 items-center gap-2 rounded-full bg-cyan px-6 py-3 text-sm font-semibold text-[#0b1316] transition-transform hover:scale-[1.03] active:scale-95"
           style={{ boxShadow: "0 12px 40px -14px rgba(108,155,173,0.7)" }}
         >
-          Start a project
+          Launch With Me
           <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
         </button>
       </motion.div>

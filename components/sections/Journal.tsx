@@ -28,7 +28,7 @@ export function Journal() {
   return (
     <section id="journal" className="relative mx-auto max-w-[1500px] px-5 py-24 sm:px-8 lg:px-12 sm:py-32">
       <SectionHeading
-        index="05 // CAPTAIN LOGS"
+        index="07 // CAPTAIN LOGS"
         title="How I work."
         blurb="Short notes on how I build and what I refuse to compromise on. Useful if you're deciding who to trust with a launch."
       />
