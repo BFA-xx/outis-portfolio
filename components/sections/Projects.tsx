@@ -15,9 +15,9 @@ export function Projects() {
   return (
     <section id="modules" className="relative mx-auto max-w-[1500px] px-5 py-24 sm:px-8 lg:px-12 sm:py-32">
       <SectionHeading
-        index="02 // MODULE SYSTEM"
+        index="03 // DEPLOYED SYSTEMS"
         title="Systems, not screenshots."
-        blurb="Each project is a live module. Activate one to run its boot sequence and open the full architecture."
+        blurb="Real platforms in production, with real money and real communities running through them. Activate a module for the full breakdown."
       />
 
       <motion.div
@@ -146,14 +146,21 @@ function ModuleCard({
         </div>
 
         <div
-          className="mt-7 flex items-center gap-2 text-sm font-medium transition-colors"
+          className="mt-7 flex items-center justify-between gap-3 text-sm font-medium transition-colors"
           style={{ color: hover ? `rgb(${accentRgb})` : "var(--ink-dim)" }}
         >
-          <span className="mono-label text-[11px]">ACTIVATE MODULE</span>
-          <ArrowUpRight
-            size={16}
-            className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-          />
+          <span className="flex items-center gap-2">
+            <span className="mono-label text-[11px]">ACTIVATE MODULE</span>
+            <ArrowUpRight
+              size={16}
+              className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+            />
+          </span>
+          {module.liveUrl && (
+            <span className="mono-label truncate text-[10px] text-ink-faint">
+              {module.liveUrl.replace(/^https?:\/\//, "").replace(/\/$/, "")}
+            </span>
+          )}
         </div>
       </div>
     </motion.button>

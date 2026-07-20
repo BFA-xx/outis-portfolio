@@ -10,7 +10,7 @@ interface BootSequenceProps {
   onComplete: () => void;
 }
 
-// The "module boot" — a short terminal sequence shown when a module opens:
+// The "module boot" - a short terminal sequence shown when a module opens:
 //   Initializing module…  Loading architecture…  Access granted
 // Honors reduced-motion by completing instantly.
 export function BootSequence({ name, accent, onComplete }: BootSequenceProps) {

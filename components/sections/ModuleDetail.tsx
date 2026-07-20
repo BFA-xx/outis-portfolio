@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Cpu, AlertTriangle, Layers, Sparkles, BarChart3 } from "lucide-react";
+import { X, Cpu, AlertTriangle, Layers, Sparkles, BarChart3, ExternalLink } from "lucide-react";
 import type { ProjectModule } from "@/lib/data";
 import { BootSequence } from "../ui/BootSequence";
 import { cinematic, fadeUp, stagger } from "@/lib/motion";
@@ -135,6 +135,35 @@ export function ModuleDetail({
                         {module.summary}
                       </p>
                     </motion.div>
+
+                    {/* live product link */}
+                    {module.liveUrl && (
+                      <motion.div
+                        variants={fadeUp}
+                        className="flex flex-wrap items-center gap-x-4 gap-y-2"
+                      >
+                        <a
+                          href={module.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-transform hover:scale-[1.03] active:scale-95"
+                          style={{
+                            background: `rgb(${accentRgb})`,
+                            color: "#0b1316",
+                            boxShadow: `0 12px 40px -14px rgba(${accentRgb},0.7)`,
+                          }}
+                        >
+                          Visit live site
+                          <ExternalLink
+                            size={15}
+                            className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                          />
+                        </a>
+                        <span className="font-mono text-xs text-ink-faint">
+                          {module.liveUrl.replace(/^https?:\/\//, "").replace(/\/$/, "")}
+                        </span>
+                      </motion.div>
+                    )}
 
                     {/* meta strip */}
                     <motion.div

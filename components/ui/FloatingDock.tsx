@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Home, Boxes, GitBranch, BookOpen } from "lucide-react";
+import { Home, Boxes, GitBranch, BookOpen, LayoutGrid } from "lucide-react";
 import { navItems } from "@/lib/data";
 import { scrollToSection } from "../system/SmoothScroll";
 import { SystemModeToggle } from "./SystemModeToggle";
@@ -10,12 +10,13 @@ import { spring } from "@/lib/motion";
 
 const icons = {
   core: Home,
+  services: LayoutGrid,
   modules: Boxes,
   timeline: GitBranch,
   journal: BookOpen,
 } as const;
 
-// A floating glass control bar — a UI layer, not a website menu. It tracks the
+// A floating glass control bar - a UI layer, not a website menu. It tracks the
 // active section via an IntersectionObserver and highlights it with a shared
 // layout pill. Each item expands its label on hover with a spring.
 export function FloatingDock() {

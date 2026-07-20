@@ -24,15 +24,18 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.realoutis.com"),
   title: "OUTIS // System Core",
   description:
-    "OUTIS — Systems & automation engineer and Web3 builder. A live interactive operating system showcasing Mintooor (mainnet NFT mint engine) and the KOS whitelist raffle infrastructure.",
+    "OUTIS builds the software crypto projects launch with: launch sites, token pages, dashboards, admin panels, claim and staking portals, Telegram and Discord bots and wallet integrations. Available for freelance Web3 development.",
   keywords: [
     "OUTIS",
-    "Web3",
-    "automation",
-    "systems engineering",
+    "Web3 developer",
+    "freelance Web3 developer",
+    "crypto website developer",
+    "token landing page",
     "NFT mint bot",
+    "Telegram bot developer",
+    "Discord bot developer",
+    "Web3 dashboard",
     "Mintooor",
-    "Discord bot",
     "KOSLabs",
   ],
   authors: [{ name: "OUTIS" }],
@@ -40,14 +43,15 @@ export const metadata: Metadata = {
   openGraph: {
     title: "OUTIS // System Core",
     description:
-      "A live interactive operating system. Builder across Web3, automation and systems engineering.",
+      "Web3 developer building launch sites, token pages, dashboards, claim and staking portals, Telegram and Discord bots. Available for freelance work.",
     type: "website",
     url: "https://www.realoutis.com",
   },
   twitter: {
     card: "summary_large_image",
     title: "OUTIS // System Core",
-    description: "Builder across Web3, automation and systems engineering.",
+    description:
+      "Web3 developer building launch sites, dashboards, portals and bots. Available for freelance work.",
     creator: "@Tosincrypt",
   },
 };

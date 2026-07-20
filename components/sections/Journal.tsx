@@ -7,7 +7,7 @@ import { logs, type CaptainLog } from "@/lib/data";
 import { SectionHeading } from "../ui/SectionHeading";
 import { cinematic, fadeUp, stagger } from "@/lib/motion";
 
-// Captain logs — short field notes. Each opens a focused glass modal.
+// Captain logs - short field notes. Each opens a focused glass modal.
 export function Journal() {
   const [open, setOpen] = useState<CaptainLog | null>(null);
 
@@ -28,9 +28,9 @@ export function Journal() {
   return (
     <section id="journal" className="relative mx-auto max-w-[1500px] px-5 py-24 sm:px-8 lg:px-12 sm:py-32">
       <SectionHeading
-        index="04 // CAPTAIN LOGS"
-        title="Notes from the build."
-        blurb="Short logs on automation, production discipline, and systems thinking."
+        index="05 // CAPTAIN LOGS"
+        title="How I work."
+        blurb="Short notes on how I build and what I refuse to compromise on. Useful if you're deciding who to trust with a launch."
       />
 
       <motion.div

@@ -28,7 +28,7 @@ export function Hero() {
     my.set(((e.clientY - r.top) / r.height - 0.5) * 2);
   };
 
-  // Layered transforms — different magnitudes create depth. Hooks must be
+  // Layered transforms - different magnitudes create depth. Hooks must be
   // called unconditionally at the top level, so each axis is declared inline.
   const farX = useTransform(sx, [-1, 1], [-18 * depth, 18 * depth]);
   const farY = useTransform(sy, [-1, 1], [-18 * depth, 18 * depth]);
@@ -121,20 +121,20 @@ export function Hero() {
           className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row"
         >
           <button
-            onClick={() => scrollToSection("modules")}
+            onClick={() => scrollToSection("contact")}
             className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-cyan px-7 py-3.5 text-sm font-semibold text-[#0b1316] transition-transform hover:scale-[1.03] active:scale-95"
             style={{ boxShadow: "0 12px 50px -12px rgba(108,155,173,0.7)" }}
           >
-            <span className="relative z-10">Enter System</span>
+            <span className="relative z-10">Start a project</span>
             <ArrowRight size={16} className="relative z-10 transition-transform group-hover:translate-x-1" />
             <span className="absolute inset-0 -translate-x-full bg-white/40 transition-transform duration-500 group-hover:translate-x-full" />
           </button>
           <button
-            onClick={() => scrollToSection("modules")}
+            onClick={() => scrollToSection("services")}
             className="inline-flex items-center gap-2 rounded-full glass px-7 py-3.5 text-sm font-medium text-ink transition-all hover:border-white/25 hover:text-white"
           >
             <Boxes size={16} className="text-purple" />
-            View Projects
+            What I build
           </button>
         </motion.div>
 
@@ -156,7 +156,7 @@ export function Hero() {
         </motion.div>
       </motion.div>
 
-      {/* floating glass HUD panels — decorative, parallaxed, desktop only */}
+      {/* floating glass HUD panels - decorative, parallaxed, desktop only */}
       <motion.div
         style={farPanel}
         className="pointer-events-none absolute left-[6%] top-[24%] hidden lg:block"

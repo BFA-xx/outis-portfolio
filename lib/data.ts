@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// SYSTEM DATA — single source of truth for the OUTIS operating system.
+// SYSTEM DATA - single source of truth for the OUTIS operating system.
 // Everything the interface renders (identity, modules, evolution log, captain
 // logs) is derived from this file so content stays consistent across the system.
 // ─────────────────────────────────────────────────────────────────────────────
@@ -17,14 +17,14 @@ export interface Identity {
 
 export const identity: Identity = {
   callsign: "OUTIS",
-  role: "Systems & Automation Engineer · Web3 Builder",
-  location: "Operating remotely · GMT+1",
+  role: "Web3 Developer · Launch Sites, Dashboards, Bots & Onchain Tooling",
+  location: "Available for freelance · Remote",
   status: "ONLINE",
   avatar: "/profile.jpg",
   manifesto: [
-    "I build systems that run when no one is watching.",
-    "Bots that move real money on Ethereum mainnet. Infrastructure that survives production. Automation that turns noise into signal.",
-    "Engineering discipline from the physical world — applied to the on-chain one.",
+    "I build the software crypto projects launch with.",
+    "Launch sites, token pages, dashboards, admin panels, claim and staking portals, Telegram and Discord bots, wallet integrations. Designed, built and shipped by one engineer.",
+    "Running live on Ethereum mainnet with real money moving through it. Currently taking on new projects.",
   ],
 };
 
@@ -48,10 +48,108 @@ export interface CoreStat {
 }
 
 export const coreStats: CoreStat[] = [
-  { value: "24/7", label: "Mainnet uptime" },
-  { value: "100%", label: "Simulated before spend" },
-  { value: "200", label: "Wallet farm capacity" },
-  { value: "2", label: "Live systems shipped" },
+  { value: "LIVE", label: "Shipped on Ethereum mainnet" },
+  { value: "24/7", label: "Always-on infrastructure" },
+  { value: "200+", label: "Wallets under automation" },
+  { value: "100%", label: "Transactions simulated first" },
+];
+
+// ── SERVICES (what I build) ──────────────────────────────────────────────────
+
+export interface Service {
+  id: string;
+  title: string;
+  blurb: string;
+  /** Icon key resolved to a lucide component in the Services section. */
+  icon: string;
+  accent: Accent;
+}
+
+export const services: Service[] = [
+  {
+    id: "launch-sites",
+    title: "Launch Websites",
+    blurb: "The site your project launches behind. Fast, polished, and built to hold up on mint day.",
+    icon: "rocket",
+    accent: "cyan",
+  },
+  {
+    id: "token-pages",
+    title: "Token Landing Pages",
+    blurb: "A single page that sells the token: tokenomics, chart embeds, contract address and buy links.",
+    icon: "coins",
+    accent: "purple",
+  },
+  {
+    id: "dashboards",
+    title: "Dashboard Applications",
+    blurb: "Live onchain data, wallet state and account activity in one interface your users understand.",
+    icon: "dashboard",
+    accent: "cyan",
+  },
+  {
+    id: "telegram-bots",
+    title: "Telegram Bots",
+    blurb: "Command-driven bots for mints, alerts, sales and verification. Anything you'd rather not do by hand.",
+    icon: "telegram",
+    accent: "purple",
+  },
+  {
+    id: "discord-bots",
+    title: "Discord Bots",
+    blurb: "Verification, roles, raffles and community automation that runs without a moderator awake.",
+    icon: "discord",
+    accent: "cyan",
+  },
+  {
+    id: "wallet",
+    title: "Wallet Integrations",
+    blurb: "Connect, sign and transact, with wiring that handles the messy wallet and network edge cases properly.",
+    icon: "wallet",
+    accent: "purple",
+  },
+  {
+    id: "claim",
+    title: "Claim Portals",
+    blurb: "Airdrop and allowlist claim flows with eligibility checks and gas-aware transactions.",
+    icon: "claim",
+    accent: "cyan",
+  },
+  {
+    id: "staking",
+    title: "Staking Interfaces",
+    blurb: "Stake, unstake and rewards screens wired straight to your contracts with live position data.",
+    icon: "staking",
+    accent: "purple",
+  },
+  {
+    id: "admin",
+    title: "Admin Panels",
+    blurb: "A private control panel so your team can run the product without touching a terminal.",
+    icon: "admin",
+    accent: "cyan",
+  },
+  {
+    id: "analytics",
+    title: "Analytics Dashboards",
+    blurb: "Holders, volume, mint progress and revenue, pulled onchain and rendered in real time.",
+    icon: "analytics",
+    accent: "purple",
+  },
+  {
+    id: "automation",
+    title: "Custom Automation",
+    blurb: "Monitors, schedulers and execution bots that keep working while your team sleeps.",
+    icon: "automation",
+    accent: "cyan",
+  },
+  {
+    id: "contract-frontends",
+    title: "Smart Contract Frontends",
+    blurb: "A clean interface on top of your contracts, with simulation before anything gets signed.",
+    icon: "contract",
+    accent: "purple",
+  },
 ];
 
 // ── MODULES ──────────────────────────────────────────────────────────────────
@@ -75,6 +173,8 @@ export interface ProjectModule {
   accent: Accent;
   tagline: string;
   summary: string;
+  /** Public URL of the running product, shown as a live link. */
+  liveUrl?: string;
   meta: ModuleMeta[];
   problem: string;
   architecture: string;
@@ -88,67 +188,71 @@ export const modules: ProjectModule[] = [
     id: "mintooor",
     codename: "MOD-01 · MINTOOOR",
     name: "Mintooor",
-    category: "Mint Automation Engine",
+    category: "NFT Launch & Minting Platform",
     status: "LIVE · MAINNET",
     accent: "cyan",
-    tagline: "Real-money NFT minting — automated, and simulated before every spend.",
+    tagline:
+      "Production NFT minting platform with automated execution, multi-wallet management and full Telegram control.",
     summary:
-      "A Telegram-native minting engine running live on Ethereum mainnet with real funds. Paste a contract or a link; it reads the drop, checks eligibility, snipes the open, and broadcasts — while refusing to spend on a transaction it can't first simulate clean.",
+      "Built for teams and collectors who need to mint reliably when it actually counts. Paste a contract or a link and the platform reads the drop, works out which wallets are eligible, times the open to the second, and executes, while refusing to spend on any transaction it can't first prove safe. Runs on its own always-on infrastructure.",
+    liveUrl: "https://mint.koslabs.app/",
     meta: [
-      { label: "Surface", value: "Telegram bot + web dashboard" },
-      { label: "Chain", value: "Ethereum mainnet" },
-      { label: "Runtime", value: "AWS EC2 · pm2 · 24/7" },
+      { label: "Interface", value: "Telegram bot + web dashboard" },
+      { label: "Network", value: "Ethereum mainnet" },
+      { label: "Hosting", value: "Dedicated server · 24/7" },
     ],
     problem:
-      "Competitive NFT drops are won on speed and lost on mistakes. Manual minting is slow, error-prone, and one malicious contract can drain a wallet. Mintooor collapses detection, eligibility, timing and safety into a single paste-and-go flow — without ever trusting a transaction it hasn't proven safe.",
+      "Competitive drops are decided in seconds, and a single wrong contract, wrong price or malicious approval costs real money. This platform removes the manual steps that lose drops: it finds the right contract, confirms eligibility across every wallet, fires the moment the sale opens, and never signs anything it hasn't simulated first.",
     architecture:
       "A pnpm monorepo: a NestJS API for chain logic, a grammY Telegram bot for the interface, and a Next.js read-only dashboard. viem drives the chain with a resilient multi-RPC fallback; seaport-js powers listings and sweeps. State lives in Postgres + Redis; the whole stack runs 24/7 on AWS EC2 under pm2 with persisted snipe / copy / reminder rules that survive every restart.",
     capabilities: [
-      "Auto-detects SeaDrop, direct-mint and launchpad contracts — including free-then-paid and bonding-curve pricing.",
-      "Phase-aware sniping with deterministic turbo timing that arms exactly at open, not a tick late.",
-      "Copy-minting: watch lead wallets on-chain and auto-mint what they mint, matched quantity and gas.",
-      "Auto-flip, floor sweeper and a Seaport listing engine — mint, list and take profit in one loop.",
-      "Per-wallet × per-phase eligibility matrix, cross-checked against a project's own allowlist checker.",
-      "Drainer / approval simulation on every spend — wrong data fails the sim and never touches the chain.",
+      "Reads any drop automatically, including standard mints, launchpads, free-then-paid and bonding-curve pricing.",
+      "Times the sale opening precisely so a mint isn't lost to a few seconds of delay.",
+      "Mirrors chosen wallets onchain and buys the same assets automatically, matching quantity and speed.",
+      "Lists and sells acquired assets from the same system, including bulk floor purchasing.",
+      "Shows exactly which of your wallets qualify for each phase before the sale goes live.",
+      "Simulates every transaction and blocks malicious approvals, so bad data never reaches the chain.",
     ],
     stack: ["TypeScript", "NestJS", "Next.js", "grammY", "viem", "seaport-js", "PostgreSQL", "Redis", "pm2", "AWS EC2"],
     impact: [
-      { label: "Status", value: "Live on mainnet, real NFTs minted" },
-      { label: "Safety", value: "Every spend simulated first" },
-      { label: "Scale", value: "Up to 200 managed wallets" },
+      { label: "Status", value: "Live on mainnet with real funds" },
+      { label: "Reliability", value: "24/7, survives restarts" },
+      { label: "Scale", value: "Up to 200 wallets managed" },
     ],
   },
   {
-    id: "kos-wl",
-    codename: "MOD-02 · KOS-WL",
-    name: "KOS Whitelist Engine",
-    category: "Discord Raffle Infrastructure",
-    status: "FEATURE-COMPLETE",
+    id: "kos-raffles",
+    codename: "MOD-02 · KOS-RAFFLES",
+    name: "KOS Raffles",
+    category: "Community Raffle & Whitelist Platform",
+    status: "LIVE",
     accent: "purple",
-    tagline: "Provably-fair whitelist raffles for Discord, with a control dashboard.",
+    tagline:
+      "Run whitelist campaigns, raffles and giveaways your community can actually trust, end to end from Discord.",
     summary:
-      "A premium whitelist raffle system for NFT communities. Discord-native entry, a verifiable draw nobody can rig, encrypted wallet handling, and exportable proof — wired to a web dashboard that can reroll or end a raffle with a live announcement.",
+      "Gives a project team a way to run whitelist and giveaway campaigns without the usual accusations. Members enter from Discord, winners are drawn by a method anyone can check afterwards, wallet addresses are stored encrypted, and every campaign exports a clean winner list plus shareable proof. A web dashboard lets the team reroll or close a campaign and announce the result live.",
+    liveUrl: "https://raffle.koslabs.app/",
     meta: [
-      { label: "Surface", value: "Discord bot + web dashboard" },
-      { label: "Org", value: "KOSLabs infrastructure" },
-      { label: "Fairness", value: "Verifiable HMAC draw" },
+      { label: "Interface", value: "Discord bot + web dashboard" },
+      { label: "Built for", value: "NFT & token communities" },
+      { label: "Fairness", value: "Independently verifiable draw" },
     ],
     problem:
-      "Whitelist raffles depend on trust — and most are a black box. KOS replaces 'trust me' with proof: a committed random seed, an HMAC-verifiable winner draw, and downloadable artifacts so any entrant can confirm the result was never tampered with.",
+      "Whitelist raffles run on trust, and communities are quick to shout rigged. This replaces 'trust us' with evidence: a draw anyone can verify after the fact, an encrypted record of every entry, and downloadable proof the team can post, so the result stops being an argument and the team gets back to launching.",
     architecture:
-      "A pnpm monorepo: a Prisma + Postgres data package, a discord.js v14 bot, and a Next.js dashboard. The scheduler is sweep-based and crash-safe — it recomputes pending draws straight from the database on boot. The bot exposes a localhost-only internal API so the dashboard can trigger reroll / end actions that surface as live Discord announcements.",
+      "A pnpm monorepo: a Prisma + Postgres data package, a discord.js v14 bot, and a Next.js dashboard. The scheduler is sweep-based and crash-safe, recomputing pending draws straight from the database on boot. The bot exposes a localhost-only internal API so the dashboard can trigger reroll / end actions that surface as live Discord announcements.",
     capabilities: [
-      "Verifiable winner draw — HMAC over a committed random seed, auditable after the fact.",
-      "Wallet addresses encrypted at rest with AES-256-GCM.",
-      "Proof pipeline: PDF report, generated winner-card image, and CSV export.",
-      "Crash-safe scheduler that rebuilds raffle state from the database.",
-      "Dashboard control: reroll or end a raffle with a live, in-server announcement.",
+      "Winner selection anyone can verify afterwards, with no way for the team to quietly pick favourites.",
+      "Entrant wallet addresses encrypted at rest, so a leak doesn't expose your community.",
+      "Every campaign exports a PDF report, a shareable winner card and a CSV for the allowlist.",
+      "Survives server restarts mid-campaign and picks up exactly where it left off.",
+      "Team dashboard to reroll or close a campaign, announced live in the server.",
     ],
     stack: ["TypeScript", "discord.js v14", "Next.js", "Prisma", "PostgreSQL", "pdfkit", "@napi-rs/canvas"],
     impact: [
-      { label: "Status", value: "Feature-complete, builds clean" },
-      { label: "Trust", value: "Draw verifiable end-to-end" },
-      { label: "Output", value: "PDF · image · CSV proof" },
+      { label: "Status", value: "Live and running" },
+      { label: "Trust", value: "Draw verifiable by entrants" },
+      { label: "Handover", value: "Winner list + proof export" },
     ],
   },
 ];
@@ -168,64 +272,64 @@ export const timeline: TimelineEntry[] = [
   {
     id: "t0",
     stamp: "ORIGIN",
-    title: "Systems thinking, the hard way",
+    title: "Engineering foundation",
     detail:
-      "Food engineering and time inside a real production line. Learned how systems are designed for scale, how quality is controlled, and exactly how processes break under pressure. That lens never left.",
+      "Formal engineering training and time on a real production floor, designing for throughput, quality control and failure under load. The same discipline goes into every system I ship for a client.",
     tag: "FOUNDATION",
     accent: "purple",
   },
   {
     id: "t1",
     stamp: "WEB3",
-    title: "Into crypto — research first",
+    title: "Moved into Web3 full-time",
     detail:
-      "Years deep in the space researching privacy, DePIN and AI infrastructure. Co-founded KOSLabs, a Web3 collaboration and research lab connecting protocols with the right communities.",
+      "Spent years researching privacy, DePIN and AI infrastructure, then co-founded KOSLabs, connecting protocols with the right communities. Client work grew out of knowing this industry from the inside.",
     tag: "RESEARCH",
     accent: "purple",
   },
   {
     id: "t2",
     stamp: "2026·06·14",
-    title: "Mintooor goes 24/7 on mainnet",
+    title: "Shipped first production minting platform",
     detail:
-      "The mint engine moves off the laptop and onto AWS EC2 under pm2 — boot-persistent, real funds, real drops. The 'bot keeps stopping' era ends.",
-    tag: "DEPLOY",
+      "Took the NFT minting platform from prototype to always-on production infrastructure, running continuously and handling real funds on Ethereum mainnet.",
+    tag: "LAUNCH",
     accent: "cyan",
   },
   {
     id: "t3",
     stamp: "2026·06·19",
-    title: "Copy-mint + listing engine ship",
+    title: "Added automated wallet execution",
     detail:
-      "On-chain lead-wallet watching auto-mints what others mint. A Seaport listing engine lands so the same system that mints can also list and sell.",
+      "Extended the platform so it can mirror onchain activity and execute automatically, plus an integrated listing engine, so the same system that acquires assets can now sell them.",
     tag: "FEATURE",
     accent: "cyan",
   },
   {
     id: "t4",
     stamp: "2026·06·20",
-    title: "Eligibility matrix + auto-flip",
+    title: "Expanded platform capabilities",
     detail:
-      "A per-wallet × per-phase eligibility grid replaces guesswork. Auto-flip and a parallel floor sweeper close the loop from mint to profit.",
+      "Added multi-wallet eligibility checking, automated profit-taking and bulk purchasing, turning a single-purpose tool into a full operations platform.",
     tag: "FEATURE",
     accent: "cyan",
   },
   {
     id: "t5",
     stamp: "2026·06·22",
-    title: "KOS whitelist engine built",
+    title: "Launched Discord whitelist infrastructure",
     detail:
-      "A provably-fair Discord raffle system with a verifiable HMAC draw, encrypted wallets, and a proof pipeline — feature-complete and compiling clean.",
-    tag: "BUILD",
+      "Delivered a verifiable raffle and whitelist platform for community launches, with encrypted entries, a team control dashboard and exportable proof for every campaign.",
+    tag: "LAUNCH",
     accent: "purple",
   },
   {
     id: "t6",
     stamp: "NOW",
-    title: "Scaling the operating system",
+    title: "Available for client projects",
     detail:
-      "More systems, more automation, more surface. The work compounds — each module makes the next one faster to build.",
-    tag: "ACTIVE",
+      "Taking on new Web3 builds: launch sites, dashboards, claim and staking portals, bots and custom automation. Bring a scope and a deadline and I'll tell you straight whether it's doable.",
+    tag: "AVAILABLE",
     accent: "cyan",
   },
 ];
@@ -250,7 +354,7 @@ export const logs: CaptainLog[] = [
     excerpt: "The best system is the one you stop thinking about. It just runs.",
     body: [
       "Automation isn't about doing things faster. It's about removing yourself from the loop so the system keeps its promise whether or not you're awake.",
-      "Mintooor started as a way to mint one drop without fat-fingering a contract address. It became a 24/7 engine that snipes, copies, lists and sweeps — because every time I solved one manual step, the next one became the bottleneck.",
+      "Mintooor started as a way to mint one drop without fat-fingering a contract address. It became a 24/7 engine that snipes, copies, lists and sweeps, because every time I solved one manual step, the next one became the bottleneck.",
       "The lesson: build the boring reliability first. Persistence, restarts, failover. The flashy feature is worthless if the process dies overnight.",
     ],
   },
@@ -261,7 +365,7 @@ export const logs: CaptainLog[] = [
     title: "Simulate before you spend",
     excerpt: "In production, optimism is a liability. Prove it, then send it.",
     body: [
-      "Every mint Mintooor makes is simulated before a single wei leaves a wallet — including a detector for drainer and approval side-effects. If the data is wrong, the simulation fails and nothing is broadcast.",
+      "Every mint Mintooor makes is simulated before a single wei leaves a wallet, including a detector for drainer and approval side-effects. If the data is wrong, the simulation fails and nothing is broadcast.",
       "This came straight out of food production thinking: you don't taste-test the whole batch, you validate the process so the bad batch never ships. Same instinct, different chain.",
       "It's the one invariant I will never trade for speed. Fast is good. Fast and wrong is how you lose real money.",
     ],
@@ -274,7 +378,7 @@ export const logs: CaptainLog[] = [
     excerpt: "Fairness only counts if anyone can check it.",
     body: [
       "KOS taught me that trust is a feature you have to engineer, not assume. A raffle that says 'trust me, it's random' is worth nothing.",
-      "So the draw is verifiable: an HMAC over a committed random seed, with a PDF, an image and a CSV anyone can audit. The scheduler is crash-safe — it rebuilds its state from the database, because a server can and will restart at the worst moment.",
+      "So the draw is verifiable: an HMAC over a committed random seed, with a PDF, an image and a CSV anyone can audit. The scheduler is crash-safe and rebuilds its state from the database, because a server can and will restart at the worst moment.",
       "Community infrastructure lives or dies on perceived fairness. Make the proof downloadable and the arguments disappear.",
     ],
   },
@@ -283,17 +387,18 @@ export const logs: CaptainLog[] = [
     index: "LOG 004",
     date: "Field note",
     title: "Systems thinking from engineering",
-    excerpt: "A protocol is a production line. Things break under load — design for it.",
+    excerpt: "A protocol is a production line. Things break under load, so design for it.",
     body: [
       "Studying food engineering and working a production floor gave me a different lens than most people building in crypto. I think in throughput, failure modes and quality control.",
-      "When an RPC endpoint hit its daily limit and took every read down with it, the fix wasn't a patch — it was a resilient fallback across multiple providers so one dead node can't break everything. That's process design, not crypto.",
-      "Decentralization, reliability, simulation-before-spend — they all rhyme with the same idea: build the system so it holds when conditions don't.",
+      "When an RPC endpoint hit its daily limit and took every read down with it, the fix wasn't a patch but a resilient fallback across multiple providers, so one dead node can't break everything. That's process design, not crypto.",
+      "Decentralization, reliability and simulation-before-spend all rhyme with the same idea: build the system so it holds when conditions don't.",
     ],
   },
 ];
 
 export const navItems = [
   { id: "core", label: "Home" },
+  { id: "services", label: "Services" },
   { id: "modules", label: "Projects" },
   { id: "timeline", label: "Timeline" },
   { id: "journal", label: "Journal" },

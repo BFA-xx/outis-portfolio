@@ -40,17 +40,19 @@ export function Contact() {
 
         <motion.div variants={fadeUp} className="mb-3 flex items-center gap-3">
           <span className="h-px w-8 bg-gradient-to-r from-cyan to-transparent" />
-          <span className="mono-label text-[10px] text-cyan">05 // OPEN A CHANNEL</span>
+          <span className="mono-label text-[10px] text-cyan">06 // OPEN A CHANNEL</span>
         </motion.div>
 
         <motion.h2
           variants={fadeUp}
           className="max-w-xl text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl"
         >
-          Building something that needs to run on its own?
+          Launching a token, an NFT drop or a Web3 product?
         </motion.h2>
         <motion.p variants={fadeUp} className="mt-4 max-w-lg text-sm leading-relaxed text-ink-dim sm:text-base">
-          Automation, Web3 tooling, bots, infrastructure. If it has to be fast, safe and always-on — let&apos;s talk.
+          I build the sites, dashboards, portals and bots crypto teams launch with, from a one-page
+          token site to a full admin platform with onchain automation behind it. Tell me what
+          you&apos;re shipping and when, and you&apos;ll get a straight answer on scope and timing.
         </motion.p>
 
         <motion.div variants={fadeUp} className="mt-9 grid gap-3 sm:grid-cols-2">

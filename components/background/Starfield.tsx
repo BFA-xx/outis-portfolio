@@ -6,7 +6,7 @@ import { useSystemMode } from "../system/SystemModeProvider";
 interface Star {
   x: number;
   y: number;
-  z: number; // depth 0..1 — parallax + size + brightness
+  z: number; // depth 0..1 - parallax + size + brightness
   r: number;
   tw: number;
   tws: number;
@@ -26,7 +26,7 @@ interface Node {
 
 // One lightweight canvas, two layers:
 //   1) a faint parallax star backdrop (depth/atmosphere)
-//   2) a constellation of tiny white dots that connect with lines — the links
+//   2) a constellation of tiny white dots that connect with lines - the links
 //      brighten with scroll velocity and the field drifts up as you scroll down,
 //      so it visibly "wires itself together" on the way down the page.
 // Nearby dots also reach toward the cursor. Pauses when the tab is hidden.
