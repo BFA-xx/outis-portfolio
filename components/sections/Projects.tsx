@@ -25,14 +25,14 @@ export function Projects() {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, margin: "-80px" }}
-        className="grid gap-5 md:grid-cols-2"
+        className="grid gap-5 md:grid-cols-2 lg:grid-cols-3"
       >
         {modules.map((m, i) => (
           <ModuleCard key={m.id} module={m} index={i} onOpen={() => setOpen(m)} />
         ))}
       </motion.div>
 
-      <ModuleDetail module={open} onClose={() => setOpen(null)} />
+      <ModuleDetail module={open} onClose={() => setOpen(null)} onNavigate={setOpen} />
     </section>
   );
 }

@@ -226,10 +226,13 @@ export interface ProjectModule {
   liveUrl?: string;
   meta: ModuleMeta[];
   problem: string;
-  architecture: string;
-  capabilities: string[];
-  stack: string[];
+  solution: string;
   impact: ModuleMeta[];
+  capabilities: string[];
+  whyBuilt: string;
+  /** Rendered under the "Engineering" heading. */
+  architecture: string;
+  stack: string[];
 }
 
 export const modules: ProjectModule[] = [
@@ -251,9 +254,13 @@ export const modules: ProjectModule[] = [
       { label: "Hosting", value: "Dedicated server · 24/7" },
     ],
     problem:
-      "Competitive drops are decided in seconds, and a single wrong contract, wrong price or malicious approval costs real money. This platform removes the manual steps that lose drops: it finds the right contract, confirms eligibility across every wallet, fires the moment the sale opens, and never signs anything it hasn't simulated first.",
+      "Competitive drops are decided in seconds, and a single wrong contract, wrong price or malicious approval costs real money. Doing it by hand loses the drop. Doing it wrong loses the wallet.",
+    solution:
+      "One paste-and-go flow. The platform finds the right contract, checks every wallet for eligibility, waits for the exact open, and executes across chains. Nothing is signed until a simulation proves it safe. A collector runs an entire wallet farm from a Telegram chat.",
     architecture:
-      "A pnpm monorepo: a NestJS API for chain logic, a grammY Telegram bot for the interface, and a Next.js read-only dashboard. viem drives the chain with a resilient multi-RPC fallback; seaport-js powers listings and sweeps. State lives in Postgres + Redis; the whole stack runs 24/7 on AWS EC2 under pm2 with persisted snipe / copy / reminder rules that survive every restart.",
+      "A pnpm monorepo: a NestJS API for chain logic, a grammY Telegram bot for the interface, and a Next.js dashboard. viem drives the chain with a resilient multi-RPC fallback; seaport-js powers listings and sweeps. State lives in Postgres and Redis. The whole stack runs 24/7 on a dedicated server under pm2, with snipe, copy and reminder rules that survive every restart.",
+    whyBuilt:
+      "It started as a way to mint one drop without fat-fingering a contract address. Every manual step I removed exposed the next one, so it grew into a full engine. It has handled real money on mainnet since day one.",
     capabilities: [
       "Runs across multiple chains rather than being locked to a single network.",
       "Reads any drop automatically, including standard mints, launchpads, free-then-paid and bonding-curve pricing.",
@@ -288,9 +295,13 @@ export const modules: ProjectModule[] = [
       { label: "Fairness", value: "Independently verifiable draw" },
     ],
     problem:
-      "Whitelist raffles run on trust, and communities are quick to shout rigged. This replaces 'trust us' with evidence: a draw anyone can verify after the fact, an encrypted record of every entry, and downloadable proof the team can post, so the result stops being an argument and the team gets back to launching.",
+      "Whitelist raffles run on trust, and communities are quick to shout rigged. Every draw the team can't prove is a fight waiting to happen.",
+    solution:
+      "Members enter from Discord. The winner draw is verifiable after the fact, so no one can claim it was fixed. Entries are encrypted at rest, and every campaign exports a clean winner list plus proof the team can post. Rerolls and closes run from a dashboard, not a database.",
     architecture:
-      "A pnpm monorepo: a Prisma + Postgres data package, a discord.js v14 bot, and a Next.js dashboard. The scheduler is sweep-based and crash-safe, recomputing pending draws straight from the database on boot. The bot exposes a localhost-only internal API so the dashboard can trigger reroll / end actions that surface as live Discord announcements.",
+      "A pnpm monorepo: a Prisma and Postgres data package, a discord.js v14 bot, and a Next.js dashboard. The scheduler is sweep-based and crash-safe, recomputing pending draws straight from the database on boot. The bot exposes a localhost-only internal API so the dashboard can trigger reroll and end actions that surface as live Discord announcements.",
+    whyBuilt:
+      "Communities shout rigged the moment a raffle ends. I built the proof in so the argument never starts, and gave the team controls so no one has to touch a database to run a campaign.",
     capabilities: [
       "Winner selection anyone can verify afterwards, with no way for the team to quietly pick favourites.",
       "Entrant wallet addresses encrypted at rest, so a leak doesn't expose your community.",
@@ -304,6 +315,46 @@ export const modules: ProjectModule[] = [
       { label: "Trust", value: "Draw verifiable by entrants" },
       { label: "Handover", value: "Winner list + proof export" },
     ],
+  },
+  {
+    id: "godpull",
+    codename: "MOD-03 · GODPULL",
+    name: "GodPull",
+    category: "Interactive Launch Experience",
+    status: "LIVE",
+    accent: "cyan",
+    tagline:
+      "An interactive browser experience built to make a launch impossible to scroll past.",
+    summary:
+      "A cinematic ritual you play in the browser instead of a landing page you skim. It turns a launch into an event: procedural visuals, generative sound and a pull mechanic that people replay and share. Built to spread on its own before launch day, and live right now.",
+    liveUrl: "https://the-ritual-awaits.vercel.app",
+    meta: [
+      { label: "Surface", value: "Browser, mobile and desktop" },
+      { label: "Type", value: "Launch marketing experience" },
+      { label: "Assets", value: "Fully procedural, none loaded" },
+    ],
+    problem:
+      "A launch lives or dies on attention. A static landing page states facts and gets scrolled past. Nothing about it makes someone stop, play, or send it to a friend before the product is even live.",
+    solution:
+      "Turn the launch into something you do, not something you read. An interactive ritual with cinematic animation, sound and a pull mechanic that rewards curiosity and returns a result worth sharing. The experience is the marketing.",
+    impact: [
+      { label: "Status", value: "Live and playable" },
+      { label: "Weight", value: "No image or audio downloads" },
+      { label: "Reach", value: "Every result is shareable" },
+    ],
+    capabilities: [
+      "Interactive browser gameplay with a pull mechanic built to be replayed.",
+      "Cinematic animation generated live in the browser, not pre-rendered video.",
+      "Procedural visuals and audio, so there is nothing heavy to download.",
+      "Generated share cards that carry the experience out into social feeds.",
+      "Holds its atmosphere across mobile and desktop without dropping frames.",
+      "Deployed to production on its own domain and playable today.",
+    ],
+    whyBuilt:
+      "Most launch pages are forgettable. I wanted to prove a launch could be something people choose to play and share, and build the frontend craft to carry it.",
+    architecture:
+      "A Next.js App Router frontend in strict TypeScript. Every omen, sigil, sound and share card is generated at runtime, so there are no external assets and nothing to wait on. Framer Motion drives the cinematic sequencing, and the render path is tuned to stay smooth on a phone. Shipped to production on Vercel.",
+    stack: ["TypeScript", "Next.js", "Tailwind CSS", "Framer Motion", "Canvas", "Web Audio", "Vercel"],
   },
 ];
 
@@ -553,6 +604,26 @@ export const recentBuilds: Build[] = [
     status: "LIVE",
     accent: "purple",
     liveUrl: "https://raffle.koslabs.app/",
+  },
+  {
+    id: "build-godpull",
+    title: "GodPull",
+    description:
+      "An interactive launch experience for the browser. Cinematic, fully procedural, and built to be replayed and shared.",
+    stack: ["Next.js", "TypeScript", "Framer Motion", "Canvas"],
+    status: "LIVE",
+    accent: "cyan",
+    liveUrl: "https://the-ritual-awaits.vercel.app",
+  },
+  {
+    id: "build-koslabs",
+    title: "KOS Labs",
+    description:
+      "The primary marketing site for the KOS ecosystem. Introduces the products, sets the brand and routes users into the apps.",
+    stack: ["Next.js", "TypeScript", "Tailwind"],
+    status: "LIVE",
+    accent: "purple",
+    liveUrl: "https://koslabs.app",
   },
   {
     id: "build-outis",
