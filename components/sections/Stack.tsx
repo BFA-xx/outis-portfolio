@@ -33,7 +33,7 @@ export function Stack() {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, margin: "-80px" }}
-        className="grid gap-4 md:grid-cols-2 lg:grid-cols-3"
+        className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5"
       >
         {stackGroups.map((group) => (
           <StackCard key={group.id} group={group} />
@@ -46,18 +46,16 @@ export function Stack() {
 function StackCard({ group }: { group: StackGroup }) {
   const Icon = icons[group.icon as keyof typeof icons] ?? Blocks;
   const accentRgb = group.accent === "cyan" ? "108,155,173" : "196,194,170";
-  // Long groups (the chains) span wider and lay their items out in two columns
-  // so the card stays short instead of towering over the others.
-  const wide = group.items.length >= 10;
+  // Long groups (the chains) keep the same card size as the others but pack
+  // their items into two compact columns so the card isn't a tall tower.
+  const twoCol = group.items.length >= 10;
 
   return (
     <motion.div
       variants={fadeUp}
       whileHover={{ y: -4 }}
       transition={spring}
-      className={`ring-glow group relative overflow-hidden rounded-2xl glass p-5 transition-colors duration-300 hover:border-white/20 accent-${group.accent} ${
-        wide ? "md:col-span-2 lg:col-span-2" : ""
-      }`}
+      className={`ring-glow group relative overflow-hidden rounded-2xl glass p-5 transition-colors duration-300 hover:border-white/20 accent-${group.accent}`}
     >
       <div className="mb-4 flex items-center gap-2.5">
         <span
@@ -73,14 +71,14 @@ function StackCard({ group }: { group: StackGroup }) {
         <span className="mono-label text-[10px] text-ink-dim">{group.label}</span>
       </div>
 
-      <ul className={wide ? "grid grid-cols-2 gap-x-6 gap-y-2" : "space-y-2"}>
+      <ul className={twoCol ? "grid grid-cols-2 gap-x-3 gap-y-2" : "space-y-2"}>
         {group.items.map((item) => (
-          <li key={item} className="flex items-center gap-2.5 text-sm text-ink-dim">
+          <li key={item} className="flex items-center gap-2 text-sm text-ink-dim">
             <span
               className="h-1 w-1 shrink-0 rounded-full"
               style={{ background: `rgb(${accentRgb})` }}
             />
-            {item}
+            <span className="truncate">{item}</span>
           </li>
         ))}
       </ul>
