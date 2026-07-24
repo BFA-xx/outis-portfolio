@@ -60,7 +60,11 @@ html {
 }
 
 body {
-  background: var(--space);
+  /* Transparent on purpose: the fixed Background layer sits at a negative
+     z-index, and a solid body background would paint OVER it (the classic
+     "negative z-index hides behind body bg" gotcha), hiding the aurora and the
+     constellation. The base colour lives on <html> instead, so there's no flash. */
+  background: transparent;
   color: var(--ink);
   font-family: var(--font-display), system-ui, sans-serif;
   min-height: 100svh;

@@ -71,7 +71,22 @@ export const stackGroups: StackGroup[] = [
     label: "Chains",
     icon: "chain",
     accent: "cyan",
-    items: ["Ethereum", "Base", "Polygon", "Arbitrum"],
+    items: [
+      "Ethereum",
+      "Base",
+      "Arbitrum",
+      "Optimism",
+      "Polygon",
+      "BNB Chain",
+      "opBNB",
+      "Linea",
+      "Blast",
+      "Scroll",
+      "Zora",
+      "Shape",
+      "Stable",
+      "Robinhood Chain",
+    ],
   },
   {
     id: "frontend",
@@ -250,7 +265,7 @@ export const modules: ProjectModule[] = [
     liveUrl: "https://mint.koslabs.app/",
     meta: [
       { label: "Interface", value: "Telegram bot + web dashboard" },
-      { label: "Networks", value: "Multichain, live on mainnet" },
+      { label: "Networks", value: "14 chains, live on mainnet" },
       { label: "Hosting", value: "Dedicated server · 24/7" },
     ],
     problem:
@@ -262,7 +277,7 @@ export const modules: ProjectModule[] = [
     whyBuilt:
       "It started as a way to mint one drop without fat-fingering a contract address. Every manual step I removed exposed the next one, so it grew into a full engine. It has handled real money on mainnet since day one.",
     capabilities: [
-      "Runs across multiple chains rather than being locked to a single network.",
+      "Runs across 14 chains, including Ethereum, Base, Arbitrum, Optimism, Polygon, BNB Chain and more.",
       "Reads any drop automatically, including standard mints, launchpads, free-then-paid and bonding-curve pricing.",
       "Times the sale opening precisely so a mint isn't lost to a few seconds of delay.",
       "Mirrors chosen wallets onchain and buys the same assets automatically, matching quantity and speed.",

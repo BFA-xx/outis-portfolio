@@ -85,15 +85,16 @@ export function Starfield() {
         };
       });
 
-      // constellation nodes
-      const nodeBase = Math.min(Math.round((width * height) / 8000), 150);
-      const nodeCount = sys ? nodeBase : Math.round(nodeBase * 0.8);
+      // constellation nodes. Denser divisor + a higher mobile floor so phones
+      // still show a real network, not three lonely dots.
+      const nodeBase = Math.min(Math.round((width * height) / 7000), 170);
+      const nodeCount = sys ? nodeBase : Math.round(nodeBase * 0.9);
       nodes = new Array(nodeCount).fill(0).map(() => ({
         bx: Math.random() * width,
         by: Math.random() * height,
         vx: (Math.random() - 0.5) * 0.18,
         vy: (Math.random() - 0.5) * 0.18,
-        r: 1.3 + Math.random() * 1.7,
+        r: 2 + Math.random() * 2,
         rx: 0,
         ry: 0,
       }));
@@ -173,7 +174,7 @@ export function Starfield() {
       }
 
       // ── connection lines (white, fade with distance + scroll) ───────────
-      const baseLine = sys ? 0.34 : 0.27;
+      const baseLine = sys ? 0.5 : 0.42;
       for (let i = 0; i < nodes.length; i++) {
         const a = nodes[i];
         for (let j = i + 1; j < nodes.length; j++) {
@@ -186,8 +187,8 @@ export function Starfield() {
             const t = 1 - d / maxDist;
             const alpha = t * (baseLine + scrollBoost);
             if (alpha < 0.012) continue;
-            ctx.strokeStyle = `rgba(240, 245, 247, ${alpha.toFixed(3)})`;
-            ctx.lineWidth = 0.9;
+            ctx.strokeStyle = `rgba(255, 255, 255, ${alpha.toFixed(3)})`;
+            ctx.lineWidth = 1.1;
             ctx.beginPath();
             ctx.moveTo(a.rx, a.ry);
             ctx.lineTo(b.rx, b.ry);
@@ -224,13 +225,13 @@ export function Starfield() {
         // soft halo so each dot reads clearly against the dark base
         if (!rm) {
           ctx.beginPath();
-          ctx.arc(n.rx, n.ry, n.r * 2.8, 0, Math.PI * 2);
-          ctx.fillStyle = "rgba(244, 248, 250, 0.10)";
+          ctx.arc(n.rx, n.ry, n.r * 3, 0, Math.PI * 2);
+          ctx.fillStyle = "rgba(255, 255, 255, 0.16)";
           ctx.fill();
         }
         ctx.beginPath();
         ctx.arc(n.rx, n.ry, n.r, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(246, 250, 252, 0.98)";
+        ctx.fillStyle = "rgba(255, 255, 255, 1)";
         ctx.fill();
       }
 
