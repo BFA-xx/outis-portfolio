@@ -85,16 +85,16 @@ export function Starfield() {
         };
       });
 
-      // constellation nodes. Denser divisor + a higher mobile floor so phones
-      // still show a real network, not three lonely dots.
-      const nodeBase = Math.min(Math.round((width * height) / 7000), 170);
-      const nodeCount = sys ? nodeBase : Math.round(nodeBase * 0.9);
+      // constellation nodes. Kept intentionally subtle so it reads as ambient
+      // texture that blends into the page, not a prominent network.
+      const nodeBase = Math.min(Math.round((width * height) / 11000), 110);
+      const nodeCount = sys ? nodeBase : Math.round(nodeBase * 0.8);
       nodes = new Array(nodeCount).fill(0).map(() => ({
         bx: Math.random() * width,
         by: Math.random() * height,
         vx: (Math.random() - 0.5) * 0.18,
         vy: (Math.random() - 0.5) * 0.18,
-        r: 2 + Math.random() * 2,
+        r: 1 + Math.random() * 1.2,
         rx: 0,
         ry: 0,
       }));
@@ -132,7 +132,7 @@ export function Starfield() {
       prevScrollY = sy;
       scrollVel = scrollVel * 0.88 + Math.abs(sd) * 0.12;
       scrollY = sy;
-      const scrollBoost = rm ? 0 : Math.min(scrollVel * 0.02, 0.55);
+      const scrollBoost = rm ? 0 : Math.min(scrollVel * 0.014, 0.2);
       const scrollPar = rm ? 0 : sys ? 0.16 : 0.09; // field drifts up as you scroll
 
       ctx.clearRect(0, 0, width, height);
@@ -174,7 +174,7 @@ export function Starfield() {
       }
 
       // ── connection lines (white, fade with distance + scroll) ───────────
-      const baseLine = sys ? 0.5 : 0.42;
+      const baseLine = sys ? 0.14 : 0.1;
       for (let i = 0; i < nodes.length; i++) {
         const a = nodes[i];
         for (let j = i + 1; j < nodes.length; j++) {
@@ -187,8 +187,8 @@ export function Starfield() {
             const t = 1 - d / maxDist;
             const alpha = t * (baseLine + scrollBoost);
             if (alpha < 0.012) continue;
-            ctx.strokeStyle = `rgba(255, 255, 255, ${alpha.toFixed(3)})`;
-            ctx.lineWidth = 1.1;
+            ctx.strokeStyle = `rgba(210, 223, 228, ${alpha.toFixed(3)})`;
+            ctx.lineWidth = 0.7;
             ctx.beginPath();
             ctx.moveTo(a.rx, a.ry);
             ctx.lineTo(b.rx, b.ry);
@@ -222,16 +222,16 @@ export function Starfield() {
       // ── node dots (tiny white) ──────────────────────────────────────────
       for (let i = 0; i < nodes.length; i++) {
         const n = nodes[i];
-        // soft halo so each dot reads clearly against the dark base
+        // very soft halo, just enough to lift the dot off the base
         if (!rm) {
           ctx.beginPath();
-          ctx.arc(n.rx, n.ry, n.r * 3, 0, Math.PI * 2);
-          ctx.fillStyle = "rgba(255, 255, 255, 0.16)";
+          ctx.arc(n.rx, n.ry, n.r * 2.4, 0, Math.PI * 2);
+          ctx.fillStyle = "rgba(224, 233, 237, 0.04)";
           ctx.fill();
         }
         ctx.beginPath();
         ctx.arc(n.rx, n.ry, n.r, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(255, 255, 255, 1)";
+        ctx.fillStyle = "rgba(224, 233, 237, 0.5)";
         ctx.fill();
       }
 
