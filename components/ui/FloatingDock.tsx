@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { usePathname } from "next/navigation";
 import { Home, Boxes, GitBranch, BookOpen, LayoutGrid } from "lucide-react";
 import { navItems } from "@/lib/data";
 import { scrollToSection } from "../system/SmoothScroll";
@@ -51,6 +52,11 @@ export function FloatingDock() {
     sections.forEach((s) => observer.observe(s));
     return () => observer.disconnect();
   }, []);
+
+  // The dock scrolls to sections on the home page, so its buttons would be dead
+  // on any standalone route. Hide it there and let the page own its own nav.
+  const pathname = usePathname();
+  if (pathname !== "/") return null;
 
   return (
     <motion.nav
