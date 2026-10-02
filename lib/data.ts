@@ -50,7 +50,7 @@ export interface CoreStat {
 export const coreStats: CoreStat[] = [
   { value: "LIVE", label: "Multichain, live on mainnet" },
   { value: "24/7", label: "Always-on infrastructure" },
-  { value: "200+", label: "Wallets under automation" },
+  { value: "1,200+", label: "Wallets under automation" },
   { value: "100%", label: "Transactions simulated first" },
 ];
 
@@ -86,6 +86,12 @@ export const stackGroups: StackGroup[] = [
       "Shape",
       "Stable",
       "Robinhood Chain",
+      "Abstract",
+      "Ink",
+      "Unichain",
+      "HyperEVM",
+      "Arc",
+      "NEAR",
     ],
   },
   {
@@ -107,7 +113,7 @@ export const stackGroups: StackGroup[] = [
     label: "Onchain",
     icon: "onchain",
     accent: "purple",
-    items: ["viem", "ethers.js", "wagmi", "WalletConnect", "Seaport"],
+    items: ["viem", "ethers.js", "wagmi", "WalletConnect", "Seaport", "Solidity", "EIP-7702"],
   },
   {
     id: "infra",
@@ -259,42 +265,88 @@ export const modules: ProjectModule[] = [
     status: "LIVE · MULTICHAIN",
     accent: "cyan",
     tagline:
-      "Production multichain NFT minting platform with automated execution, multi-wallet management and full Telegram control.",
+      "Production multichain NFT minting platform with sub-second launch execution, a 1,200-wallet farm, AI drop research and full Telegram control.",
     summary:
-      "Built for teams and collectors who need to mint reliably when it actually counts. Paste a contract or a link and the platform reads the drop, works out which wallets are eligible, times the open to the second, and executes, while refusing to spend on any transaction it can't first prove safe. Runs on its own always-on infrastructure.",
+      "Built for teams and collectors who need to mint reliably when it actually counts. Paste a contract or a link and the platform reads the drop, works out which wallets are eligible, times the open to the block, and executes, while refusing to spend on any transaction it can't first prove safe. An AI layer reads each drop and says whether it is worth minting, a ledger shows whether minting actually paid, and a companion Mini App puts the whole account in one tap. Runs on its own always-on infrastructure.",
     liveUrl: "https://mint.koslabs.app/",
     meta: [
-      { label: "Interface", value: "Telegram bot + web dashboard" },
-      { label: "Networks", value: "14 chains, live on mainnet" },
+      { label: "Interface", value: "Telegram bot, Mini App + web dashboard" },
+      { label: "Networks", value: "19 EVM chains + NEAR, live on mainnet" },
       { label: "Hosting", value: "Dedicated server · 24/7" },
     ],
     problem:
       "Competitive drops are decided in seconds, and a single wrong contract, wrong price or malicious approval costs real money. Doing it by hand loses the drop. Doing it wrong loses the wallet.",
     solution:
-      "One paste-and-go flow. The platform finds the right contract, checks every wallet for eligibility, waits for the exact open, and executes across chains. Nothing is signed until a simulation proves it safe. A collector runs an entire wallet farm from a Telegram chat.",
+      "One paste-and-go flow. The platform finds the right contract, checks every wallet for eligibility, waits for the exact open, and executes across chains. Nothing is signed until a simulation proves it safe. When a sale opens, a stream of pre-signed transactions is already queued across the flip, and a factory contract fits dozens of mints into one transaction. A collector runs an entire wallet farm from a Telegram chat, with every flow living on a single message they can step back through.",
     architecture:
-      "A pnpm monorepo: a NestJS API for chain logic, a grammY Telegram bot for the interface, and a Next.js dashboard. viem drives the chain with a resilient multi-RPC fallback; seaport-js powers listings and sweeps. State lives in Postgres and Redis. The whole stack runs 24/7 on a dedicated server under pm2, with snipe, copy and reminder rules that survive every restart.",
+      "A pnpm monorepo: a NestJS API for chain logic, a grammY Telegram bot for the interface, and a Next.js dashboard. viem drives the chain with a resilient multi-RPC fallback; seaport-js powers listings and sweeps. State lives in Postgres and Redis. The whole stack runs 24/7 on a dedicated server under pm2, with snipe, copy and reminder rules that survive every restart. Wallet keys are sealed with AWS KMS and escrowed nightly, an off-box watchdog checks production every two minutes, and Claude powers the drop takes and deep research with live web search and X reads.",
     whyBuilt:
       "It started as a way to mint one drop without fat-fingering a contract address. Every manual step I removed exposed the next one, so it grew into a full engine. It has handled real money on mainnet since day one.",
     capabilities: [
-      "Runs across 14 chains, including Ethereum, Base, Arbitrum, Optimism, Polygon, BNB Chain and more.",
-      "Reads any drop automatically, including standard mints, launchpads, free-then-paid and bonding-curve pricing.",
-      "Times the sale opening precisely so a mint isn't lost to a few seconds of delay.",
+      "Runs across 19 EVM chains plus NEAR, including Ethereum, Base, Arbitrum, Robinhood Chain, Abstract, Ink, HyperEVM and Arc.",
+      "Reads any drop automatically, including standard mints, launchpads, free-then-paid, bonding curves, proof-of-work and timed free lanes it proves by simulation.",
+      "Fires a pipelined stream of pre-signed transactions across the sale flip, so the shot is already in the queue when the open lands.",
+      "A mint factory contract and EIP-7702 batching put many mints in one transaction and one queue slot.",
+      "Briefs every race before it opens and writes an autopsy after, naming exactly why a mint was won or lost.",
+      "AI takes and deep research on any drop: what it is, who is behind it, and a MINT / WATCH / SKIP verdict with sources.",
+      "A profit ledger marks every mint against live offers, and alerts the holder when one is worth selling. It never sells on its own.",
+      "Mint calendar, allowlist radar, smart-money tracking and a daily recap, all from the chat.",
       "Mirrors chosen wallets onchain and buys the same assets automatically, matching quantity and speed.",
       "Lists and sells acquired assets from the same system, including bulk floor purchasing.",
       "Shows exactly which of your wallets qualify for each phase before the sale goes live.",
-      "Simulates every transaction and blocks malicious approvals, so bad data never reaches the chain.",
+      "Simulates every transaction and blocks malicious approvals, and holds any price change for the user's yes, so bad data never reaches the chain.",
     ],
-    stack: ["TypeScript", "NestJS", "Next.js", "grammY", "viem", "seaport-js", "PostgreSQL", "Redis", "pm2", "AWS EC2"],
+    stack: ["TypeScript", "NestJS", "Next.js", "grammY", "viem", "seaport-js", "Solidity", "Claude API", "PostgreSQL", "Redis", "pm2", "AWS EC2", "AWS KMS"],
     impact: [
-      { label: "Status", value: "Live on mainnet, multichain" },
-      { label: "Reliability", value: "24/7, survives restarts" },
-      { label: "Scale", value: "Up to 200 wallets managed" },
+      { label: "Status", value: "Live on mainnet, 20 networks" },
+      { label: "Reliability", value: "24/7, watched off-box" },
+      { label: "Scale", value: "1,200+ wallets, 77 members" },
     ],
   },
   {
+    id: "mintooor-app",
+    codename: "MOD-02 · MINTOOOR APP",
+    name: "Mintooor Mini App",
+    category: "Telegram Mini App · Portfolio & Control",
+    status: "LIVE · IN TELEGRAM",
+    accent: "purple",
+    tagline:
+      "The whole Mintooor account in one tap: wallets, NFTs at live offers, snipes, profit and radars, inside Telegram.",
+    summary:
+      "A companion app that opens from the Open App button beside every member's message box. It shows every chain's balance, every NFT priced at what it would actually sell for right now, armed snipes with live countdowns, the mint calendar and a real profit view. Anything that moves money hands back to the chat for an explicit approval, so the app is fast to browse and impossible to fat-finger.",
+    liveUrl: "https://t.me/MintooorBot",
+    meta: [
+      { label: "Surface", value: "Telegram Mini App" },
+      { label: "Access", value: "Members only, signed by Telegram" },
+      { label: "Theme", value: "Follows Telegram, dark and light" },
+    ],
+    problem:
+      "A chat bot is great for doing things and bad for seeing things. Checking balances across twenty networks, what a bag of NFTs is worth, or whether last month's mints paid meant scrolling through a dozen commands and messages.",
+    solution:
+      "Put the read side of the platform in a real app that lives inside Telegram. One tap opens a terminal-style dashboard with Wallet, NFTs, Snipes, Radar, Calendar, History and Profit. It opens instantly from a local copy and refreshes every tab in parallel, while sends, mints and listings are staged in the app and approved in the chat.",
+    impact: [
+      { label: "Status", value: "Live for every member" },
+      { label: "Speed", value: "Opens instantly, tabs in seconds" },
+      { label: "Safety", value: "No money moves without the chat" },
+    ],
+    capabilities: [
+      "Wallet tab with every chain's balance, a USD total and a per-wallet breakdown across the farm.",
+      "NFTs valued at the live collection-offer book, not the floor, with search, chain filters and rarity rank.",
+      "Profit tab over 24H, 7D, 30D and all time: spend against what the NFTs fetch now, ROI, win rate and failed gas.",
+      "Shareable PnL cards for the whole account or a single collection, rendered on the server and posted to the chat.",
+      "Armed snipes with live T-minus countdowns, plus a mint calendar marked with the lists your wallets are on.",
+      "Send NFTs, mint, list or sell by staging it in the app; the bot posts Approve or Cancel and re-checks ownership onchain.",
+      "Theme follows Telegram's dark or light mode, and a toggle pins it per device.",
+    ],
+    whyBuilt:
+      "Members were asking the bot the same questions every morning: what do I hold, what is it worth, what opens today. A screen answers that faster than any message, and keeping money moves in the chat meant the app could be quick without being risky.",
+    architecture:
+      "One self-contained page served by the Mintooor NestJS API under a strict content security policy. Every request is authenticated by Telegram's signed initData, verified by HMAC against the bot token with a 24 hour limit, and gated to approved members. Balances come from one Multicall3 read per chain, NFT values from a shared offer-book cache, and history names are memoised and read in parallel. Hand-offs to the chat go through an outbox the bot polls every second, replayed as the member's own tap so the full chat flow runs.",
+    stack: ["TypeScript", "Telegram Mini Apps", "NestJS", "grammY", "viem", "Multicall3", "OpenSea API", "Canvas"],
+  },
+  {
     id: "kos-raffles",
-    codename: "MOD-02 · KOS-RAFFLES",
+    codename: "MOD-03 · KOS-RAFFLES",
     name: "KOS Raffles",
     category: "Community Raffle & Whitelist Platform",
     status: "LIVE",
@@ -333,7 +385,7 @@ export const modules: ProjectModule[] = [
   },
   {
     id: "godpull",
-    codename: "MOD-03 · GODPULL",
+    codename: "MOD-04 · GODPULL",
     name: "GodPull",
     category: "Interactive Launch Experience",
     status: "LIVE",
@@ -441,6 +493,33 @@ export const timeline: TimelineEntry[] = [
   },
   {
     id: "t6",
+    stamp: "2026·09·20",
+    title: "Rebuilt launch execution for sub-second opens",
+    detail:
+      "Studied how hot drops are actually won, then rebuilt the engine around it: pre-signed transaction streams across the flip, a mint factory contract that fits many mints in one transaction, and a written autopsy for every race.",
+    tag: "ENGINE",
+    accent: "cyan",
+  },
+  {
+    id: "t7",
+    stamp: "2026·10·01",
+    title: "Added an AI intelligence layer",
+    detail:
+      "Claude now reads each drop's site, contract and X activity and gives a verdict, with a deep research mode that searches the web and cites its sources. Alongside it shipped a profit ledger, sell alerts and a mint calendar.",
+    tag: "AI",
+    accent: "purple",
+  },
+  {
+    id: "t8",
+    stamp: "2026·10·02",
+    title: "Launched the Mintooor Mini App",
+    detail:
+      "A Telegram Mini App that puts wallets, NFTs at live offers, snipes and profit one tap away for every member, with money moves still approved in the chat.",
+    tag: "LAUNCH",
+    accent: "cyan",
+  },
+  {
+    id: "t9",
     stamp: "NOW",
     title: "Available for client projects",
     detail:
@@ -508,6 +587,18 @@ export const logs: CaptainLog[] = [
       "Studying food engineering and working a production floor gave me a different lens than most people building in crypto. I think in throughput, failure modes and quality control.",
       "When an RPC endpoint hit its daily limit and took every read down with it, the fix wasn't a patch but a resilient fallback across multiple providers, so one dead node can't break everything. That's process design, not crypto.",
       "Decentralization, reliability and simulation-before-spend all rhyme with the same idea: build the system so it holds when conditions don't.",
+    ],
+  },
+  {
+    id: "log-005",
+    index: "LOG 005",
+    date: "Field note",
+    title: "A race is decided in one block",
+    excerpt: "If you send when the sale opens, you are already late.",
+    body: [
+      "I pulled apart a hot open on Robinhood Chain block by block. The supply was gone within five blocks, and every winner had a transaction sitting in the queue before the sale flipped.",
+      "So Mintooor stopped reacting to the open. It now streams pre-signed transactions across the exact moment, and a small factory contract lets one queue slot carry many mints.",
+      "Every race also gets an autopsy afterwards that names why it was won or lost. Guessing is how you lose the same race twice.",
     ],
   },
 ];
@@ -604,11 +695,21 @@ export const recentBuilds: Build[] = [
     id: "build-mintooor",
     title: "Mintooor",
     description:
-      "Multichain NFT minting platform with automated execution, multi-wallet management and a Telegram control surface.",
-    stack: ["Next.js", "NestJS", "viem", "PostgreSQL"],
+      "Multichain NFT minting platform with sub-second launch execution, AI drop research and a Telegram control surface.",
+    stack: ["NestJS", "viem", "Solidity", "Claude API"],
     status: "LIVE",
     accent: "cyan",
     liveUrl: "https://mint.koslabs.app/",
+  },
+  {
+    id: "build-mintooor-app",
+    title: "Mintooor Mini App",
+    description:
+      "A Telegram Mini App for wallets, NFTs at live offers, snipes and profit, with every money move approved back in the chat.",
+    stack: ["Telegram Mini Apps", "NestJS", "viem", "Canvas"],
+    status: "LIVE",
+    accent: "purple",
+    liveUrl: "https://t.me/MintooorBot",
   },
   {
     id: "build-kos-raffles",

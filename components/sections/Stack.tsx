@@ -49,6 +49,7 @@ function StackCard({ group }: { group: StackGroup }) {
   // Long groups (the chains) keep the same card size as the others but pack
   // their items into two compact columns so the card isn't a tall tower.
   const twoCol = group.items.length >= 10;
+  const dense = group.items.length >= 16;
 
   return (
     <motion.div
@@ -71,9 +72,9 @@ function StackCard({ group }: { group: StackGroup }) {
         <span className="mono-label text-[10px] text-ink-dim">{group.label}</span>
       </div>
 
-      <ul className={twoCol ? "grid grid-cols-2 gap-x-3 gap-y-2" : "space-y-2"}>
+      <ul className={twoCol ? `grid grid-cols-2 gap-x-3 ${dense ? "gap-y-1" : "gap-y-2"}` : "space-y-2"}>
         {group.items.map((item) => (
-          <li key={item} className="flex items-center gap-2 text-sm text-ink-dim">
+          <li key={item} className={`flex items-center gap-2 text-ink-dim ${dense ? "text-xs" : "text-sm"}`}>
             <span
               className="h-1 w-1 shrink-0 rounded-full"
               style={{ background: `rgb(${accentRgb})` }}

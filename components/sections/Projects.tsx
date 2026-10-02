@@ -25,7 +25,7 @@ export function Projects() {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, margin: "-80px" }}
-        className="grid gap-5 md:grid-cols-2 lg:grid-cols-3"
+        className="grid gap-5 md:grid-cols-2"
       >
         {modules.map((m, i) => (
           <ModuleCard key={m.id} module={m} index={i} onOpen={() => setOpen(m)} />
